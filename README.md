@@ -1,31 +1,40 @@
-# helpful_bot
-A bot with hepl you with daily task
+# Helpful Bot
+A bot to help with daily tasks
 
-## Instalation instructions
+## Installation Instructions
 
-1) Install python
-2) Run code with command
+1. Install Python (version 3.8 or newer)
+2. Create and activate a virtual environment:
 
-
-``` bash
-   py -m venv .venv
+For Windows (PowerShell):
+```powershell
+python -m venv .venv
+.\.venv\Scripts\Activate.ps1
 ```
 
-if you have a UNIX/MACOS/LINUX
-``` bash
-   source .venv/bin/activate
+For Windows (CMD):
+```cmd
+python -m venv .venv
+.\.venv\Scripts\activate.bat
 ```
 
-if you have a Windows
-``` CMD
-   .\.venv\Scripts\activate.bat
-```
-``` PowerShell
-   .\.venv\Scripts\Activate.ps1
+For Linux/macOS:
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
 ```
 
-``` bash
-   pip install -r requirements.txt
-   cd ./src
-   py main.py
+3. Install dependencies:
+```bash
+pip install -r requirements.txt
 ```
+
+4. Run the bot:
+```bash
+cd src
+python main.py
+```
+
+## Notes
+- Make sure you have Python installed
+- If you encounter issues with virtual environment activation, try running the terminal as administrator
