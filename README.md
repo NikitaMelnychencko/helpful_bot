@@ -1,4 +1,4 @@
-#Helpful Bot
+# Helpful Bot
 
 A bot to help with daily tasks
 
