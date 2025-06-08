@@ -1,11 +1,16 @@
+from helper.color_loger import  log_warning
+
 class NotebookServices:
-  def __init__(self):
-    self.contacts = {}
+  def __init__(self, initial_contacts=None):
+    self.contacts = initial_contacts if initial_contacts else {}
 
   def add_contact(self, args):
+    if len(args) != 2:
+      log_warning("Please provide name and phone number")
+      return ""
     name, phone = args
     self.contacts[name] = phone
-    return print(f"Contact {name} added.")
+    return f"Contact {name} added."
 
 
   def check_contact(self, name):
@@ -16,21 +21,25 @@ class NotebookServices:
 
 
   def change_contact(self, args):
+    if len(args) != 2:
+      log_warning("Please provide name and phone number")
+      return ""
     name, phone = args
     if not self.check_contact(name):
-      print(f"Contact {name} not found.")
+      log_warning(f"Contact {name} not found.")
       answer = input("Create new contact? (y/n)")
       if answer.lower() == "y":
-        self.add_contact(args)
-      else:
-        self.contacts[name] = phone
-        return print(f"Contact {name} changed.")
+        return self.add_contact(args)
+    else:
+      self.contacts[name] = phone
+      return f"Contact {name} changed."
 
   def get_contact(self, name):
     if not self.check_contact(name):
-      return print(f"Contact {name} not found.")
+      log_warning(f"Contact {name} not found.")
+      return ""
 
-    return print(f"Contact {name}: {self.contacts[name]}")
+    return f"Contact {name}: {self.contacts[name]}"
 
   def get_all_contacts(self):
-    return print(self.contacts)
+    return self.contacts

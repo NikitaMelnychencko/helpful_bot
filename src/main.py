@@ -1,5 +1,6 @@
 from services.NotebookServices import NotebookServices
-
+from services.DataServices import DataServices
+from helper.color_loger import log_error
 
 def parse_input(user_input):
     cmd, *args = user_input.split()
@@ -29,7 +30,8 @@ commands = """
 """
 
 def main():
-    contacts = NotebookServices()
+    data = DataServices()
+    contacts = NotebookServices(data.get_init_data())
     print(welcome_bunner)
     print("Welcome to the assistant bot!")
     print(commands)
@@ -39,22 +41,32 @@ def main():
         user_input = input("Enter a command: ")
         command, *args = parse_input(user_input)
 
-        match  (command):
+        match  (command.lower()):
             case "hello":
                 print("How can I help you?")
             case "add":
-                contacts.add_contact(args)
+                value = contacts.add_contact(args)
+                if value:
+                    print(value)
             case "change":
-                contacts.change_contact(args)
+                value = contacts.change_contact(args)
+                if value:
+                    print(value)
             case "phone":
-                contacts.get_contact(args[0])
+                value = contacts.get_contact(args[0])
+                if value:
+                    print(value)
             case "all":
-                contacts.get_all_contacts()
+                value = contacts.get_all_contacts()
+                if value:
+                    print(value)
             case "exit" | "close":
+                all_contacts = contacts.get_all_contacts()
+                data.save_data(all_contacts)
                 print("Good bye!")
                 break
             case _:
-                print("Invalid command.")
+                log_error("Invalid command.")
 
 if __name__ == "__main__":
     main()
